@@ -1,0 +1,23 @@
+{
+    "name": "kriptosio/bowling",
+    "description": "Code Challenge for Kriptos IO",
+    "type": "project",
+    "require": {
+        "symfony/console": "5.4",
+        "phpunit/phpunit": "^9.5",
+        "symfony/process": "^6.2"
+    },
+    "license": "The Unlicense",
+    "autoload": {
+        "psr-4": {
+            "Kriptosio\\Bowling\\": "src/",
+            "Kriptosio\\Bowling\\Lib\\": "lib/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Victor Mendez",
+            "email": "victor.ivan.mendez@gmail.com"
+        }
+    ]
+}
