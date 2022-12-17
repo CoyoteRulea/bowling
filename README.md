@@ -26,6 +26,7 @@ or
 bin/console app:run "path/to/filename"
 ```
 ### _Output Example:_
+![PHP Unit Test Output Example](https://raw.githubusercontent.com/CoyoteRulea/bowling/main/assets/images/screenshot-scoreboard.png)
 
 ### 2. ** Run PHP Unit Tests **
 - In order to run all defined PHP Unit Test please run:
@@ -37,7 +38,7 @@ bin\console app:tests
 bin\console app:tests -t usertest,usertest2
 ```
 ### _Output Example:_
-![PHP Unit Test Output Example](assets\images\screenshot-tests.png)
+![PHP Unit Test Output Example](https://raw.githubusercontent.com/CoyoteRulea/bowling/main/assets/images/screenshot-tests.png)
 
 ## License
 This repository is covered by [The Unlicensed](LICENSE.md)[^license] license.
