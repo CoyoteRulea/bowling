@@ -1,0 +1,12 @@
+#!/usr/bin/env php
+<?php
+require_once __DIR__ . '/../vendor/autoload.php';
+ 
+use Symfony\Component\Console\Application;
+use Kriptosio\Bowling\App\Commands\RunBowlingCommand;
+use Kriptosio\Bowling\App\Commands\RunUnitTestCommand;
+ 
+$app = new Application();
+$app->add(new RunBowlingCommand());
+$app->add(new RunUnitTestCommand());
+$app->run();
