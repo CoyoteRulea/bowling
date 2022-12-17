@@ -7,6 +7,9 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Output\OutputInterface;
 
+
+use Kriptosio\Bowling\Lib\ScoreBoard;
+
 // the "name" and "description" arguments of AsCommand replace the
 // static $defaultName and $defaultDescription properties
 #[AsCommand(
@@ -25,9 +28,10 @@ class RunBowlingCommand extends Command
  
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        // Code goes here \/\/\/\/
-        $output->writeln(sprintf('Write here all call for this command!, %s', $input->getArgument('filename')));
-        // Code goes here /\/\/\/\
+        $scoreboard = new ScoreBoard($input->getArgument('filename'));
+
+        echo (string) $scoreboard;
+        
         return Command::SUCCESS;
     }
 }
