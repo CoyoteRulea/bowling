@@ -13,26 +13,42 @@ class Turn {
 
     protected ?Turn $next = null;
 
+    /**
+     * Creates a new turn node 
+     * 
+     * @param int turn specificies which turn has the current node
+     */
     public function __construct(int $turn) {
+        // Creates a new turn and specifies which turn 
         $this->turnNumber = $turn;
     }
 
+    /**
+     * Check for the next score to be inserted and determines if needs to be added in new node or could be inserted in current
+     * 
+     * @param string value Value of current score
+     * 
+     * @return Turn Returns pointer for current turn element in the list
+     */
     public function addNextScore(string $value) : Turn {
-            
+        // Check if this is the last turn, to check specific rules and avoid to create a 11th node.
         if ($this->turnNumber == 10) {
             if (!isset($this->left)) {
                 $this->left = $value;
             } elseif (!isset($this->right)) {
                 $this->right = $value;
             } elseif ($this->left == '10') {
+                // Check if a third value is allowed according to rules
                 $this->extra = $value;
             } else {
+                // Something was wrong with turns and isn't allowed to insert a third value
                 throw new Exception("ERROR: An Unexpected Error Ocurred. Turn 10 only can have a extra shoot if first shoot in turn 10 is strike.");
             }
 
             return $this;
         } 
 
+        // For simple turns
         if (!isset($this->left) && (int) $value < 10) {
             // First shot case and not strike
             $this->left = $value;
@@ -55,9 +71,14 @@ class Turn {
         return $this;
     }
 
-    public function __toString() {
+    /**
+     * This object represented like string
+     * 
+     * @return string a string with score values separated by tabs
+     */
+    public function __toString() : string {
         if ($this->turnNumber == 10) {
-            $left = $this->left == '10' ? 'X' : $this->left;
+            $left  = $this->left == '10' ? 'X' : $this->left;
             $right = $this->right == '10' ? 'X' : $this->right;
             $extra = isset($this->extra) ? ($this->extra == '10' ? 'X' : $this->extra) : ' '; 
 
@@ -70,42 +91,63 @@ class Turn {
         return "$left\t$right\t";
     }
 
+    /**
+     * Check current node to analize current score value according to ten-pin bowling rules
+     * 
+     * @return int value with score for current node
+     */
     public function getScore() : int {
+        // Get integer value of each element
         $left = (int) $this->left;
         $right = (int) $this->right;
 
         $extrapoints = 0;
         $sum = 0;
+        // For all nodes check if strike or spare to add extra points
         if ($this->turnNumber != 10) {
             if ($this->right == '10') {
+                // In case of strike
                 $extrapoints = 2;
             } elseif ($left + $right == 10) {
+                // In case of spare
                 $extrapoints = 1;
             }
 
+            // If no extra points needed only calculate direct points
             if ($extrapoints == 0) {
                 return $left + $right;
             } else {
-                $sum = $left + $right;
+                // add ten posible points
+                $sum = 10;
                 for ($x = 0, $current = $this; $x < $extrapoints; $x++) {
+                    // Move to the next node
                     $current = $current->getNext();
                     if (!isset($current->left)) {
+                        // If strike
                         $sum += (int) $current->right;
                     } else {
+                        // Spare
                         $sum += (int) $current->left;
                         $x++;
+                        // Check if need to check next value
                         if ($x < $extrapoints)
                             $sum += (int) $current->right;
                     }              
                 }
             }
         } else {
+            // Last node case
             return $left + $right + (int) $this->extra;
         }
 
         return $sum;
     }
 
+    /**
+     * Access to next element in list
+     * 
+     * @return Turn pointer to next element
+     */
     public function &getNext() : ?Turn {
         return $this->next;
     }

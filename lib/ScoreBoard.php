@@ -58,4 +58,17 @@ class ScoreBoard {
 
         return $scoreString;
     }
+
+    public function printPrettyScore() {
+        $scoreString = Player::printPrettyHeader();
+        // Print players pinfalls and scores
+        foreach($this->players as $player) {
+            $scoreString .= "\n" . $player->printPrettyLines();
+        }
+
+        $scoreString .= Player::printPrettyFooter('*** This is a footer comment.');
+
+        return $scoreString;
+    }
+
 }
