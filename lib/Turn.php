@@ -16,7 +16,7 @@ class Turn {
     /**
      * Creates a new turn node 
      * 
-     * @param int turn specificies which turn has the current node
+     * @param int $turn specificies which turn has the current node
      */
     public function __construct(int $turn) {
         // Creates a new turn and specifies which turn 
@@ -26,7 +26,7 @@ class Turn {
     /**
      * Check for the next score to be inserted and determines if needs to be added in new node or could be inserted in current
      * 
-     * @param string value Value of current score
+     * @param string $value Value of current score
      * 
      * @return Turn Returns pointer for current turn element in the list
      */

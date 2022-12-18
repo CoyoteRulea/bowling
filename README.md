@@ -2,7 +2,7 @@
 ## **_Requirements_**
 In order to run the following app is required to install the following requirements:
 * PHP 8.1 Installed in your test environment.
-* Composer 2 Installed in your test environments.
+* Composer 2 Installed in your test environment.
 
 ## Script instalation
 1. Clone this repository with:
@@ -27,7 +27,7 @@ bin/console app:run "path/to/filename"
 ```
 ### _Output Example:_
 ![ScoreBoard Display Output Example](https://raw.githubusercontent.com/CoyoteRulea/bowling/main/assets/images/screenshot-scoreboard.png)
-### 1. **Run Scoreboard Easy To Read script**
+### 2. **Run Scoreboard Easy To Read script**
 ```
 bin/console app:bowling-cli "path/to/filename" --prettyfied
 ```                                       
@@ -38,7 +38,7 @@ bin/console app:run "path/to/filename" --prettyfied
 ### _Output Example:_
 ![ScoreBoard Display Output Example](https://raw.githubusercontent.com/CoyoteRulea/bowling/main/assets/images/screenshot-scoreboard-pretty.png)
 
-### 3. ** Run PHP Unit Tests **
+### 3. **Run PHP Unit Tests**
 - In order to run all defined PHP Unit Test please run:
 ```
 bin\console app:tests
