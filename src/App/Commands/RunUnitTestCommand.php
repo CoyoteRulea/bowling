@@ -36,7 +36,7 @@ class RunUnitTestCommand extends Command
     }
  
     /**
-     * 
+     * Execute all PHP Unit Tests
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {

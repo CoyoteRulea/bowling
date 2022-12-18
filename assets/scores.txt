@@ -27,9 +27,8 @@ John 3
 Jeff 10
 John 4
 John 4
-Jeff 10
-Jeff 8
-Jeff 1
+Jeff 7
+Jeff 2
 John 10
 John 9
 John 0
