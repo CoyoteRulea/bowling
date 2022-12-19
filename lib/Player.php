@@ -105,8 +105,8 @@ class Player {
         $name  = self::CHAR_PIPE . str_pad($this->name, $this->getLineWidth(), self::CHAR_SPACE, STR_PAD_BOTH) . self::CHAR_PIPE;
 
         // List all scores on this player to show pinfalls and scores  
-        for ($current = $this->rootTurn, $x = 1; isset($current); $current = $current->getNext(), $x++) {
-            switch ($x) {
+        for ($current = $this->rootTurn, $turn = 1; isset($current); $current = $current->getNext(), $turn++) {
+            switch ($turn) {
                 case 10:
                     // If this is the last node
                     $footEnd = $headEnd = $itemEnd = self::CHAR_ITEMEND;
@@ -129,8 +129,8 @@ class Player {
 
             // Get pin falls on this turn
             $pinFallValues = explode("\t", (string) $current);
-            for ($y = 0; $y < ($x == 10 ? 3 : 2); $y++) {
-                $pinfalls .= str_pad($pinFallValues[$y], self::TURN_SPACE, self::CHAR_SPACE, STR_PAD_BOTH) . self::CHAR_PIPE;
+            for ($currentValue = 0; $currentValue < ($turn == 10 ? 3 : 2); $currentValue++) {
+                $pinfalls .= str_pad($pinFallValues[$currentValue], self::TURN_SPACE, self::CHAR_SPACE, STR_PAD_BOTH) . self::CHAR_PIPE;
             }
             $scoreSum += $current->getScore();
             $score .= str_pad($scoreSum, $scorespace, self::CHAR_SPACE, STR_PAD_BOTH) . self::CHAR_PIPE;
@@ -227,7 +227,7 @@ class Player {
         
         $lineblock = '';
 
-        for ($x = 0; $x < $size; $x++) $lineblock .= $char;
+        for ($position = 0; $position < $size; $position++) $lineblock .= $char;
 
         return $lineblock;
     }

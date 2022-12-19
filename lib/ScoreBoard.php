@@ -19,10 +19,12 @@ class ScoreBoard {
 
         // If file assigned is not the absolute filename
         if (!file_exists($tryFileName)) {
+            // try to search it on assets folder
             $tryFileName = __DIR__ . '/../assets/' . $filename;
 
-            if (!file_exists($tryFileName))
-                    throw new Exception("ERROR: Unable to load file $filename.");
+            if (!file_exists($tryFileName)) {
+                throw new Exception("ERROR: Unable to load file $filename.", 10);
+            }
         }
 
         $file = fopen($tryFileName, "r");
@@ -34,7 +36,7 @@ class ScoreBoard {
             $lineElements = count($line);
             if ($lineElements > 2) {
                 // If one line contains more elements than expected
-                throw new Exception("ERROR: Required format fail on $filename at line $x.");
+                throw new Exception("ERROR: Required format fail on $filename at line $x.", 20);
             }
             elseif ($lineElements == 1) {
                 // EOF
@@ -88,4 +90,21 @@ class ScoreBoard {
         return $scoreString;
     }
 
+    /**
+     * Returns number of players on this scoreboard
+     * 
+     * @return int player count on this scoreboard
+     */
+    public function getPlayersCount() : int {
+        return count($this->players);
+    }
+
+    /**
+     * Get Player Objects list
+     * 
+     * @return array Array of player objects in your scoreboard
+     */
+    public function getPlayers() : array {
+        return $this->players;
+    }
 }

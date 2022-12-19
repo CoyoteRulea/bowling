@@ -39,7 +39,12 @@ class Turn {
                 $this->right = $value;
             } elseif ($this->left == '10') {
                 // Check if a third value is allowed according to rules
-                $this->extra = $value;
+                if (!isset($this->extra)) {
+                    $this->extra = $value;
+                } else {
+                    // Something was wrong with turns and isn't allowed containing more than 10 turns allowed
+                    throw new Exception("ERROR: An Unexpected Error Ocurred. Score file contains more than 10 turns.");
+                }
             } else {
                 // Something was wrong with turns and isn't allowed to insert a third value
                 throw new Exception("ERROR: An Unexpected Error Ocurred. Turn 10 only can have a extra shoot if first shoot in turn 10 is strike.");
