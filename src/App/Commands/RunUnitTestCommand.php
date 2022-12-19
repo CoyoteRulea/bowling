@@ -73,7 +73,6 @@ class RunUnitTestCommand extends Command
     }
 
     protected function runTestProcess(string $test = null) {
-
         $process = new Process(['./vendor/bin/phpunit', (!isset($test) ? self::TestFolder : self::TestFolder . "/$test.php")]);
         $process->run();
 
