@@ -4,6 +4,19 @@ In order to run the following app is required to install the following requireme
 * PHP 8.1 Installed in your test environment.
 * Composer 2 Installed in your test environment.
 
+
+`If you don't want to install composer at local enviroment, please feel free to use our Docker container.`
+* You need to have Docker installed and running in your local environment. [For more info click here](https://docs.docker.com/get-docker/)
+* Before step three you need to run build command with:
+```
+docker-compose up -d --build  
+```
+* And go to docker console with:
+```
+docker exec -it bowlingdemo sh  
+```
+* Continue with step three.
+
 ## Script instalation
 1. Clone this repository with:
 ```
