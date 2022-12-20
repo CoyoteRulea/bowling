@@ -23,7 +23,7 @@ class ScoreBoard {
             $tryFileName = __DIR__ . '/../assets/' . $filename;
 
             if (!file_exists($tryFileName)) {
-                throw new Exception("ERROR: Unable to load file $filename.", 10);
+                throw new Exception(sprintf(Glossary::ERROR_UNABLE_TO_OPEN_FILE, $filename), 10);
             }
         }
 
@@ -36,7 +36,7 @@ class ScoreBoard {
             $lineElements = count($line);
             if ($lineElements > 2) {
                 // If one line contains more elements than expected
-                throw new Exception("ERROR: Required format fail on $filename at line $x.", 20);
+                throw new Exception(sprintf(Glossary::ERROR_REQUIRED_FORMAT_FAIL, $filename, $x), 20);
             }
             elseif ($lineElements == 1) {
                 // EOF

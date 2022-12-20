@@ -65,19 +65,43 @@ class Player {
     }
 
     /**
+     * Get Player Name
+     * 
+     * @return string Player's name
+     */
+    public function getPlayerName() {
+        return $this->name;
+    }
+
+    /**
+     * Get Player Score Stat List
+     * 
+     * @return array list of acumulative pinfalls and scores with doble tab separated values
+     */
+    public function getPlayerStats() : array {
+        
+        $scoreSum  = 0;
+        $scoreList = '';
+        $pinfalls  = '';
+
+        for ($current = $this->rootTurn; isset($current); $current = $current->getNext()) {
+            $pinfalls  .= (string) $current;
+            $scoreSum  += $current->getScore();
+            $scoreList .= "$scoreSum\t\t";
+        }
+
+        return ['pinfalls' => $pinfalls, 'scores' => $scoreList];
+    }
+
+    /**
      * Get the pines down on every single turn and their score
      * 
      * @return string a string with turns and score values separated by tabs
      */
     public function printLines() : string {
-        $pinfalls = "Pinfalls\t";
-        $score = "Score\t\t";
-        $scoreSum = 0;
-        for ($current = $this->rootTurn; isset($current); $current = $current->getNext()) {
-            $pinfalls .=(string) $current;
-            $scoreSum += $current->getScore();
-            $score .= "$scoreSum\t\t";
-        }
+        $stats = $this->getPlayerStats();
+        $pinfalls = "Pinfalls\t{$stats['pinfalls']}";
+        $score = "Score\t\t{$stats['scores']}";
 
         return "$pinfalls\n$score";
     }
@@ -223,7 +247,7 @@ class Player {
      * 
      * @return string string with a line block
      */
-    protected static function lineBlock(int $size, string $char) : string {
+    public static function lineBlock(int $size, string $char) : string {
         
         $lineblock = '';
 

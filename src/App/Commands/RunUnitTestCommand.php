@@ -71,7 +71,13 @@ class RunUnitTestCommand extends Command
 
         return Command::SUCCESS;
     }
-
+    
+    /**
+     * Calls a PHPUnit Test command from console
+     * 
+     * @param string $test (optional) If not declared call all test in test folder, otherwise call a test PHP file
+     * 
+     */
     protected function runTestProcess(string $test = null) {
         $process = new Process(['./vendor/bin/phpunit', (!isset($test) ? self::TestFolder : self::TestFolder . "/$test.php")]);
         $process->run();
