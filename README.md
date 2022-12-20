@@ -5,7 +5,9 @@ In order to run the following app is required to install the following requireme
 * Composer 2 Installed in your test environment.
 
 :construction::heavy_exclamation_mark::shipit::heavy_exclamation_mark::construction:
+
 `If you don't want to install composer at local enviroment, please feel free to use our Docker container.`
+
 :construction::heavy_exclamation_mark::arrow_up::heavy_exclamation_mark::construction:
 
 * You need to have Docker installed and running in your local environment. [For more info click here](https://docs.docker.com/get-docker/)
