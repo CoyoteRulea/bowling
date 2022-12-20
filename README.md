@@ -13,7 +13,7 @@ docker-compose up -d --build
 ```
 * And go to docker console with:
 ```
-docker exec -it bowlingdemo sh  
+docker exec -it phpfpm-bownling sh  
 ```
 * Continue with step three.
 
