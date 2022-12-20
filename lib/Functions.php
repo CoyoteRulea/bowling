@@ -2,6 +2,8 @@
 
 namespace Kriptosio\Bowling\Lib;
 
+use Kriptosio\Bowling\Lib\Glossary;
+use Exception;
 
 class Functions {
     /**
@@ -17,7 +19,7 @@ class Functions {
     public static function getColumFromCSV(string $filename, int $column, bool $unique = false, bool $excludeHeader = false) : array {
         $column = [];
 
-        if (($file = fopen($filename, "r")) !== FALSE) {
+        if (($file = @fopen($filename, "r")) !== FALSE) {
             while (($data = fgetcsv($file, 1000, " ")) !== FALSE) {
 
                 if ($excludeHeader) continue;
@@ -29,7 +31,7 @@ class Functions {
             fclose($file);
         } else {
             // If one line contains more elements than expected
-            throw new Exception("ERROR: Unable to open $filename");
+            throw new Exception(sprintf(Glossary::ERROR_UNABLE_TO_OPEN_FILE, $filename));
         }
 
         return $column;

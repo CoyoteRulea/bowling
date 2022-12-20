@@ -19,5 +19,8 @@
             "name": "Victor Mendez",
             "email": "victor.ivan.mendez@gmail.com"
         }
-    ]
+    ],
+    "require-dev": {
+        "phpunit/php-code-coverage": "^9.2"
+    }
 }

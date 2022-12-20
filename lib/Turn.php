@@ -1,5 +1,4 @@
 <?php
-
 namespace Kriptosio\Bowling\Lib;
 
 use Exception;
@@ -14,11 +13,23 @@ class Turn {
     protected ?Turn $next = null;
 
     /**
+     * Turn exceptions
+     */
+    const ERROR_INVALID_10TH_TURN = 'ERROR: Something was wrong trying to create an invalid 10 turn number (only 1-10 are allowed).';
+    const ERROR_MORE_THAN_10TURNS = 'ERROR: An Unexpected Error Ocurred. Score file contains more than 10 turns.';
+    const ERROR_INVALIDEXTRASHOOT = 'ERROR: An Unexpected Error Ocurred. Turn 10 only can have a extra shoot if first shoot in turn 10 is strike.';
+    const ERROR_MORE_THAN10POINTS = 'ERROR: An Unexpected Error Ocurred. Lines can\'t have more than 10 pines per turn.';
+    /**
      * Creates a new turn node 
      * 
      * @param int $turn specificies which turn has the current node
      */
     public function __construct(int $turn) {
+
+        if ($turn < 1 || $turn > 10) {
+            // Something was wrong with turns and isn't allowed containing more than 10 turns allowed
+            throw new Exception(self::ERROR_INVALID_10TH_TURN, $turn);
+        }
         // Creates a new turn and specifies which turn 
         $this->turnNumber = $turn;
     }
@@ -43,11 +54,11 @@ class Turn {
                     $this->extra = $value;
                 } else {
                     // Something was wrong with turns and isn't allowed containing more than 10 turns allowed
-                    throw new Exception("ERROR: An Unexpected Error Ocurred. Score file contains more than 10 turns.");
+                    throw new Exception(self::ERROR_MORE_THAN_10TURNS);
                 }
             } else {
                 // Something was wrong with turns and isn't allowed to insert a third value
-                throw new Exception("ERROR: An Unexpected Error Ocurred. Turn 10 only can have a extra shoot if first shoot in turn 10 is strike.");
+                throw new Exception(self::ERROR_INVALIDEXTRASHOOT);
             }
 
             return $this;
@@ -60,7 +71,7 @@ class Turn {
         } else {
             // Previous shot already done
             if (isset($this->left) && (int) $this->left + (int) $value > 10) {
-                throw new Exception("ERROR: An Unexpected Error Ocurred. Lines can't have more than 10 pines per turn.");
+                throw new Exception(self::ERROR_MORE_THAN10POINTS);
             }
 
             // Strike or second shot value 
@@ -110,7 +121,7 @@ class Turn {
         $sum = 0;
         // For all nodes check if strike or spare to add extra points
         if ($this->turnNumber != 10) {
-            if ($this->right == '10') {
+            if ($this->right == '10' && !isset($this->left)) {
                 // In case of strike
                 $extrapoints = 2;
             } elseif ($left + $right == 10) {
@@ -154,6 +165,17 @@ class Turn {
      * @return Turn pointer to next element
      */
     public function &getNext() : ?Turn {
+
         return $this->next;
+    }
+
+    /**
+     * Get turn number
+     * 
+     * @return int turn number of current node
+     */
+    public function getTurnNumber() : int {
+
+        return $this->turnNumber;
     }
 }
