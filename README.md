@@ -50,6 +50,10 @@ bin\console app:tests -t usertest,usertest2
 ### _Output Example:_
 ![PHP Unit Test Output Example](https://raw.githubusercontent.com/CoyoteRulea/bowling/main/assets/images/screenshot-tests.png)
 
+### _PHPUnit Test Code Coverage_
+![PHP Unit Test Output Example](https://raw.githubusercontent.com/CoyoteRulea/bowling/main/assets/images/screenshot-codecoverage.png)
+More Coverage Dashboard Stats are [here](coverage/index.html).
+
 ## License
 This repository is covered by [The Unlicensed](LICENSE.md)[^license] license.
 
